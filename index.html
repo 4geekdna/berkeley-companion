@@ -274,7 +274,7 @@ footer { text-align: center; font-size: 0.7rem; color: #888; padding: 12px; }
     </div>
   </div>
 </div>
-<footer>Tap headers to collapse · Uber opens with destination · AH Cal · Oct 12–16 2026 · v1.1</footer>
+<footer>Tap headers to collapse · Uber opens with destination · AH Cal · Oct 12–16 2026 · v1.2</footer>
 </div>
 <div id="docs" style="display:none;padding:16px;">
   <a href="#" onclick="document.getElementById('docs').style.display='none';document.getElementById('main').style.display='block';return false;">← Back</a>
@@ -284,6 +284,9 @@ footer { text-align: center; font-size: 0.7rem; color: #888; padding: 12px; }
 <script>
 const days = [
   { label: "Oct 12", title: "Berkeley arrival", items: [
+    { name: "Leave for AUS (DL1077)", info: "12:45 PM CDT (10:45 AM PT) · be at AUS by 1:30 PM", buttons: [
+      { label: "Drive", cls: "btn-brown", href: "https://www.google.com/maps/dir/?api=1&destination=Austin-Bergstrom+International+Airport" }
+    ]},
     { name: "DL1077 AUS → SFO", info: "Depart 3:36 PM CDT · Arrive ~5:33 PM PDT · Terminal 1 · A319", buttons: [
       { label: "FlightAware", cls: "btn-gray", href: "https://www.flightaware.com/live/flight/DAL1077" },
       { label: "Uber SFO→Hotel", cls: "btn-black", href: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=37.8692&dropoff[longitude]=-122.2683&dropoff[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA" },
@@ -320,7 +323,7 @@ const days = [
       { label: "Walk", cls: "btn-brown", href: "https://www.google.com/maps/dir/?api=1&destination=2601+Warring+St+Berkeley" },
       { label: "Site", cls: "btn-gray", href: "https://psychedelics.berkeley.edu/event/conference-on-consciousness/" }
     ]},
-    { name: "UC Botanical Garden", info: "Suggested · long lunch break · ~13 min from hall", buttons: [
+    { name: "UC Botanical Garden", info: "Suggested · 12:30–1:15 PM · long lunch break · ~13 min from hall", buttons: [
       { label: "Uber", cls: "btn-black", href: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=200+Centennial+Dr+Berkeley" },
       { label: "Walk", cls: "btn-brown", href: "https://www.google.com/maps/dir/?api=1&destination=200+Centennial+Dr+Berkeley" },
       { label: "Site", cls: "btn-gray", href: "https://botanicalgarden.berkeley.edu/" }
