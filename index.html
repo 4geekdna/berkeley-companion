@@ -1,43 +1,412 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Berkeley Companion</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Berkeley Companion · Oct 12–16, 2026</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font:16px/1.4 -apple-system,system-ui,sans-serif;background:#f4efe6;color:#2a211c}
-header{background:#7a3418;color:#fff;padding:14px 16px;font-size:1.35em;font-weight:700}
-.addr{background:#fbf3e3;padding:10px 16px;font-size:.92em;border-bottom:1px solid #e6d8bf}.addr a{color:#b5471c;font-weight:600;margin-left:6px;text-decoration:none}
-main{max-width:640px;margin:auto;padding:8px 12px 30px}
-h2{font-size:.82em;letter-spacing:.06em;color:#6b6460;text-transform:uppercase;margin:16px 0 6px;cursor:pointer;display:flex;justify-content:space-between;user-select:none}
-.closed .bd{display:none}.closed .ar{display:inline-block;transform:rotate(-90deg)}
-.it,.leg,.ev,.panel{background:#fff;border-radius:12px;padding:10px 12px;margin:8px 0;box-shadow:0 1px 2px #0001}
-.nm{font-weight:600}.sb{color:#77706a;font-size:.88em}ul{margin:6px 0;padding-left:18px}
-.ps{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.p{padding:5px 12px;border-radius:999px;font-size:.85em;text-decoration:none;font-weight:600}
-.walk{background:#b5471c;color:#fff}.site{background:#e4e1dd;color:#333}.call{background:#2e7d4f;color:#fff}.uber{background:#111;color:#fff}
-.pager{display:flex;align-items:center;justify-content:space-between;background:#fff;border-radius:12px;padding:6px}.pager button{border:0;background:#f0e6d6;border-radius:8px;font-size:1.1em;padding:6px 14px}
-.t{color:#7a3418;font-weight:700;font-size:.85em}.cd{font-weight:700;color:#b5471c}
-.panel{display:none}.panel.on{display:block}.panel label{display:block;font-size:.85em;color:#666;margin-top:6px}.panel input{width:100%;padding:7px;border:1px solid #ddd;border-radius:8px;font-size:1em}
-details{margin-top:8px}summary{font-weight:600;cursor:pointer}.ck label{display:flex;gap:8px;color:#222;font-size:.95em}.ck input{width:auto}
-footer{text-align:center;color:#8a827b;font-size:.8em;padding:16px}
-</style></head><body>
-<header>Berkeley Companion</header>
-<div class="addr">Shattuck Plaza · 2086 Allston Way · <a href="https://www.hotelshattuckplaza.com/">Hotel</a><a href="https://www.google.com/maps/search/?api=1&query=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704">Map</a><a href="tel:+15108457300">Call</a><a href="#" onclick="document.getElementById('docs').classList.toggle('on');return false">Travel Docs</a></div>
+:root {
+  --brown: #5c1e0a;
+  --orange: #c65d3b;
+  --green: #2d7a4f;
+  --gray: #6c757d;
+  --bg: #f8f6f3;
+  --card: #fff;
+}
+* { box-sizing: border-box; }
+body { font: 16px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; background: var(--bg); color: #222; }
+main { max-width: 480px; margin: 0 auto; background: var(--card); min-height: 100vh; }
+header { background: var(--brown); color: #fff; padding: 10px 14px; position: sticky; top: 0; z-index: 20; }
+header h1 { margin: 0; font-size: 1.15rem; font-weight: 600; }
+.sub { background: #fff8f0; padding: 6px 14px; font-size: 0.82rem; border-bottom: 1px solid #eee; }
+.sub a { color: var(--orange); text-decoration: none; margin-right: 8px; }
+.collapsible-head { background: #f1f3f5; padding: 8px 14px; font-weight: 600; font-size: 0.9rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e9ecef; }
+.collapsible-body { padding: 10px 14px; border-bottom: 1px solid #eee; }
+.collapsible.closed .collapsible-body { display: none; }
+.flight { margin-bottom: 14px; }
+.flight b { display: block; margin-bottom: 4px; }
+.cd { color: var(--orange); font-weight: 600; }
+.btns { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 4px; }
+.btn { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.72rem; text-decoration: none; color: #fff; }
+.btn-black { background: #000; }
+.btn-brown { background: var(--orange); }
+.btn-gray { background: var(--gray); }
+.btn-green { background: var(--green); }
+.day-nav { display: flex; align-items: center; gap: 6px; }
+.day-nav a { color: inherit; text-decoration: none; font-weight: bold; }
+.filter { width: 100%; padding: 8px 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; font-size: 0.9rem; }
+.place { display: flex; justify-content: space-between; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid #f0f0f0; }
+.place:last-child { border-bottom: none; }
+.place-info { flex: 1; }
+.place-info strong { display: block; }
+.place-info small { color: #666; font-size: 0.78rem; }
+.place-btns { display: flex; flex-wrap: wrap; gap: 3px; justify-content: flex-end; }
+.hidden { display: none !important; }
+footer { text-align: center; font-size: 0.7rem; color: #888; padding: 12px; }
+</style>
+</head>
+<body>
 <main>
-<div class="panel" id="docs"><b>Travel Docs</b>
-<label>TSA PreCheck / CLEAR</label><input data-k="tsa"><label>Seat (DL1077 / SWA 2502)</label><input data-k="seat"><label>Frequent flyer #</label><input data-k="ff"><label>Emergency contact</label><input data-k="ec">
-<details><summary>Packing</summary><div class="ck" data-g="pack"></div></details>
-<details><summary>Medical</summary><div class="ck" data-g="med"></div></details>
-<details><summary>Documents</summary><div class="ck" data-g="doc"></div></details></div>
-<section><h2 onclick="tg(this)">Full Trip Transportation <span class="ar">▼</span></h2><div class="bd"><div class="leg"><b>Oct 12 — DL1077 AUS → SFO</b><ul><li>Depart AUS 3:36 PM CDT → Arrive SFO ~5:33 PM PDT (Terminal 1)</li><li>A319</li><li>Countdown to DL1077: <span class="cd" data-t="2026-10-12T15:36:00-05:00">…</span></li></ul><div class="ps"><a class="p site" href="https://www.flightaware.com/live/flight/DAL1077">FlightAware</a><a class="p site" href="https://www.delta.com/flightstatus/search?flightNumber=1077">Status</a><a class="p call" href="tel:+15125302242">AUS Mobility</a><a class="p call" href="tel:+14042093434">Delta Access</a><a class="p uber" href="https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=San%20Francisco%20International%20Airport&dropoff[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704">Uber SFO→Hotel</a><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=San%20Francisco%20International%20Airport&destination=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&travelmode=driving">Drive</a></div></div>
-<div class="leg"><b>Oct 16 — SWA 2502 OAK → PSP</b><ul><li>Hotel check-out by 12 PM · leave for OAK by ~2:45 PM</li><li>Countdown to leave for OAK: <span class="cd" data-t="2026-10-16T14:45:00-07:00">…</span></li><li>Southwest 2502 · Conf # B9L6SY · Depart OAK 4:50 PM PT → PSP</li></ul><div class="ps"><a class="p site" href="https://www.southwest.com/air/manage-reservation/">SWA 2502</a><a class="p site" href="https://www.flightaware.com/live/flight/SWA2502">FlightAware</a><a class="p uber" href="https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=Oakland%20International%20Airport%2C%201%20Airport%20Dr%2C%20Oakland%2C%20CA%2094621">Uber Hotel→OAK</a><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=Oakland%20International%20Airport%2C%201%20Airport%20Dr%2C%20Oakland%2C%20CA%2094621&travelmode=driving">Drive</a></div></div></div></section>
-<section><h2 onclick="tg(this)">Day Schedule <span class="ar">▼</span></h2><div class="bd"><div class="pager"><button onclick="go(-1)">◀</button><b id="dl"></b><button onclick="go(1)">▶</button></div><div id="ds"></div></div></section>
-<section class="sec"><h2 onclick="tg(this)">RIDE / UBER (OUT OF EASY WALK) (8) <span class="ar">▼</span></h2><div class="bd"><div class="it"><div class="nm">Good Vibes Berkeley</div><div class="sb">~10 min ride · 2504 San Pablo Ave</div><div class="ps"><a class="p uber" href="https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=2504%20San%20Pablo%20Ave%2C%20Berkeley%2C%20CA">Uber</a><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=2504%20San%20Pablo%20Ave%2C%20Berkeley%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://www.goodvibes.com/">Site</a><a class="p call" href="tel:+15108418987">Call</a></div></div><div class="it"><div class="nm">Feelmore Oakland</div><div class="sb">~15 min ride or 3 BART stops · 1703 Telegraph Ave</div><div class="ps"><a class="p uber" href="https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=1703%20Telegraph%20Ave%2C%20Oakland%2C%20CA">Uber</a><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=1703%20Telegraph%20Ave%2C%20Oakland%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://feelmore510.com/">Site</a><a class="p call" href="tel:+15108910153">Call</a></div></div><div class="it"><div class="nm">Lawrence Hall of Science</div><div class="sb">Hills · ~15 min ride</div><div class="ps"><a class="p uber" href="https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=1%20Centennial%20Dr%2C%20Berkeley%2C%20CA">Uber</a><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=1%20Centennial%20Dr%2C%20Berkeley%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://www.lawrencehallofscience.org/">Site</a></div></div><div class="it"><div class="nm">Tilden Park / Inspiration Point</div><div class="sb">Hills · ride recommended</div><div class="ps"><a class="p uber" href="https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=Inspiration%20Point%2C%20Wildcat%20Canyon%20Rd%2C%20Orinda%2C%20CA">Uber</a><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=Inspiration%20Point%2C%20Wildcat%20Canyon%20Rd%2C%20Orinda%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://www.ebparks.org/parks/tilden">Site</a></div></div><div class="it"><div class="nm">Fourth Street shops</div><div class="sb">West Berkeley · ~12 min ride</div><div class="ps"><a class="p uber" href="https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=1800%204th%20St%2C%20Berkeley%2C%20CA">Uber</a><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=1800%204th%20St%2C%20Berkeley%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://www.fourthstreet.com/">Site</a></div></div><div class="it"><div class="nm">Mrs. Dalloway's</div><div class="sb">Elmwood · ~10 min ride · books & garden</div><div class="ps"><a class="p uber" href="https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=2904%20College%20Ave%2C%20Berkeley%2C%20CA">Uber</a><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=2904%20College%20Ave%2C%20Berkeley%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://www.mrsdalloways.com/">Site</a><a class="p call" href="tel:+15107048222">Call</a></div></div><div class="it"><div class="nm">UC Botanical Garden</div><div class="sb">Hills · ~10 min ride</div><div class="ps"><a class="p uber" href="https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=200%20Centennial%20Dr%2C%20Berkeley%2C%20CA">Uber</a><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=200%20Centennial%20Dr%2C%20Berkeley%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://botanicalgarden.berkeley.edu/">Site</a><a class="p call" href="tel:+15106432755">Call</a></div></div><div class="it"><div class="nm">Claremont Club & Spa</div><div class="sb">~10 min ride · 41 Tunnel Rd</div><div class="ps"><a class="p uber" href="https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=41%20Tunnel%20Rd%2C%20Berkeley%2C%20CA">Uber</a><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=41%20Tunnel%20Rd%2C%20Berkeley%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://www.fairmont-claremont.com/">Site</a><a class="p call" href="tel:+15108433000">Call</a></div></div></div></section><section class="sec"><h2 onclick="tg(this)">PRACTICAL (4) <span class="ar">▼</span></h2><div class="bd"><div class="it"><div class="nm">CVS</div><div class="sb">~1 min</div><div class="ps"><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=CVS%20Pharmacy%2C%202300%20Shattuck%20Ave%2C%20Berkeley%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://www.cvs.com/store-locator/berkeley-ca-pharmacies">Site</a><a class="p call" href="https://www.google.com/search?q=CVS%20Berkeley%20phone">Call</a></div></div><div class="it"><div class="nm">Trader Joe's</div><div class="sb">~8 min</div><div class="ps"><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=1885%20University%20Ave%2C%20Berkeley%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://locations.traderjoes.com/ca/berkeley/">Site</a><a class="p call" href="tel:+15102049074">Call</a></div></div><div class="it"><div class="nm">Center St Garage EV</div><div class="sb">~3 min · J1772</div><div class="ps"><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=2025%20Center%20St%2C%20Berkeley%2C%20CA&travelmode=walking">Walk</a><a class="p call" href="tel:+15109817000">Call</a></div></div><div class="it"><div class="nm">Sutter Urgent Care</div><div class="sb">~9 min</div><div class="ps"><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=Sutter%20Health%20Urgent%20Care%20Berkeley%2C%20CA&travelmode=walking">Walk</a></div></div></div></section><section class="sec"><h2 onclick="tg(this)">FOOD (4) <span class="ar">▼</span></h2><div class="bd"><div class="it"><div class="nm">Ippuku</div><div class="sb">~2 min · izakaya</div><div class="ps"><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=2130%20Center%20St%2C%20Berkeley%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://www.ippukuberkeley.com/">Site</a><a class="p call" href="tel:+15106651969">Call</a></div></div><div class="it"><div class="nm">Comal</div><div class="sb">~4 min · Oaxacan</div><div class="ps"><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=2020%20Shattuck%20Ave%2C%20Berkeley%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://www.comalberkeley.com/">Site</a><a class="p call" href="tel:+15109266300">Call</a></div></div><div class="it"><div class="nm">Great China</div><div class="sb">~5 min</div><div class="ps"><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=2190%20Bancroft%20Way%2C%20Berkeley%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://www.greatchinaberkeley.com/">Site</a><a class="p call" href="tel:+15108437996">Call</a></div></div><div class="it"><div class="nm">La Note</div><div class="sb">~5 min</div><div class="ps"><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=2377%20Shattuck%20Ave%2C%20Berkeley%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://www.lanoterestaurant.com/">Site</a><a class="p call" href="tel:+15108431535">Call</a></div></div></div></section><section class="sec"><h2 onclick="tg(this)">HEALTHY (3) <span class="ar">▼</span></h2><div class="bd"><div class="it"><div class="nm">Juice Appeal</div><div class="sb">~3 min</div><div class="ps"><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=Juice%20Appeal%2C%20Berkeley%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://www.google.com/search?q=Juice+Appeal+Berkeley">Site</a><a class="p call" href="https://www.google.com/search?q=Juice%20Appeal%20Berkeley%20phone">Call</a></div></div><div class="it"><div class="nm">Tane Vegan</div><div class="sb">~6 min</div><div class="ps"><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=Tane%20Vegan%20Izakaya%2C%20Berkeley%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://www.google.com/search?q=Tane+Vegan+Izakaya+Berkeley">Site</a><a class="p call" href="https://www.google.com/search?q=Tane%20Vegan%20Berkeley%20phone">Call</a></div></div><div class="it"><div class="nm">Butcher's Son</div><div class="sb">~7 min · vegan</div><div class="ps"><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=1954%20University%20Ave%2C%20Berkeley%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://www.thebutchersveg.com/">Site</a><a class="p call" href="tel:+15109840484">Call</a></div></div></div></section><section class="sec"><h2 onclick="tg(this)">SHOPS (4) <span class="ar">▼</span></h2><div class="bd"><div class="it"><div class="nm">Pegasus Books</div><div class="sb">~5 min · daily 10–8</div><div class="ps"><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=2349%20Shattuck%20Ave%2C%20Berkeley%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://pegasusbookstore.com/">Site</a><a class="p call" href="tel:+15106491320">Call</a></div></div><div class="it"><div class="nm">Stonemountain Fabrics</div><div class="sb">~8 min</div><div class="ps"><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=2518%20Shattuck%20Ave%2C%20Berkeley%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://stonemountainfabric.com/">Site</a><a class="p call" href="tel:+15108456106">Call</a></div></div><div class="it"><div class="nm">Amoeba Music</div><div class="sb">~16 min</div><div class="ps"><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=2455%20Telegraph%20Ave%2C%20Berkeley%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://www.amoeba.com/">Site</a><a class="p call" href="tel:+15105491125">Call</a></div></div><div class="it"><div class="nm">Moe's Books</div><div class="sb">~19 min</div><div class="ps"><a class="p walk" href="https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=2476%20Telegraph%20Ave%2C%20Berkeley%2C%20CA&travelmode=walking">Walk</a><a class="p site" href="https://www.moesbooks.com/">Site</a><a class="p call" href="tel:+15108492087">Call</a></div></div></div></section>
-</main>
+<header>
+  <h1>Berkeley Companion</h1>
+</header>
+<div class="sub">
+  Shattuck Plaza · 2086 Allston Way ·
+  <a href="https://www.hotelshattuckplaza.com/" target="_blank">Hotel</a>
+  <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Shattuck+Plaza+2086+Allston+Way+Berkeley" target="_blank">Map</a>
+  <a href="tel:+15108457300">Call</a>
+  <a href="#" onclick="document.getElementById('main').style.display='none';document.getElementById('docs').style.display='block';return false;">Travel Docs</a>
+</div>
+<div id="main">
+<div class="collapsible">
+  <div class="collapsible-head" onclick="this.parentElement.classList.toggle('closed')">Full Trip Transportation <span>▼</span></div>
+  <div class="collapsible-body">
+    <div class="flight">
+      <b>Oct 12 — DL1077 AUS → SFO</b>
+      • Depart AUS 3:36 PM CDT → Arrive SFO ~5:33 PM PDT (Terminal 1)<br>
+      • A319<br>
+      • <span class="cd" data-t="2026-10-12T15:36:00-05:00">Countdown to DL1077: …</span><br>
+      <div class="btns">
+        <a class="btn btn-gray" href="https://www.flightaware.com/live/flight/DAL1077" target="_blank">FlightAware</a>
+        <a class="btn btn-gray" href="https://www.flysfo.com/" target="_blank">Status</a>
+        <a class="btn btn-green" href="tel:+15125302242">AUS Mobility</a>
+        <a class="btn btn-green" href="tel:+14042093434">Delta Access</a>
+      </div>
+      <div class="btns">
+        <a class="btn btn-black" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=37.8692&dropoff[longitude]=-122.2683&dropoff[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA" target="_blank">Uber SFO→Hotel</a>
+        <a class="btn btn-brown" href="https://www.google.com/maps/dir/?api=1&destination=Hotel+Shattuck+Plaza+2086+Allston+Way+Berkeley" target="_blank">Drive</a>
+      </div>
+    </div>
+    <div class="flight">
+      <b>Oct 16 — SWA 2502 OAK → PSP</b>
+      • Hotel check-out by 12 PM · leave for OAK by ~2:45 PM<br>
+      • <span class="cd" data-t="2026-10-16T14:45:00-07:00">Countdown to leave for OAK: …</span><br>
+      • Southwest 2502 · Conf # B9L6SY · Depart OAK 4:50 PM PT → PSP<br>
+      <div class="btns">
+        <a class="btn btn-gray" href="https://www.southwest.com/" target="_blank">SWA 2502</a>
+        <a class="btn btn-gray" href="https://www.flightaware.com/live/flight/SWA2502" target="_blank">FlightAware</a>
+      </div>
+      <div class="btns">
+        <a class="btn btn-black" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=37.7126&dropoff[longitude]=-122.2197&dropoff[formatted_address]=Oakland%20International%20Airport" target="_blank">Uber Hotel→OAK</a>
+        <a class="btn btn-brown" href="https://www.google.com/maps/dir/?api=1&destination=Oakland+International+Airport" target="_blank">Drive</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="collapsible">
+  <div class="collapsible-head">
+    Day Schedule
+    <span class="day-nav">
+      <a href="#" onclick="event.stopPropagation(); changeDay(-1); return false;">◀</a>
+      <span id="daylabel">Oct 12</span>
+      <a href="#" onclick="event.stopPropagation(); changeDay(1); return false;">▶</a>
+    </span>
+  </div>
+  <div class="collapsible-body" id="daybody"></div>
+</div>
+<input class="filter" id="filter" placeholder="Type to filter places of interest..." oninput="filterPlaces()">
+<div class="collapsible" data-cat="ride">
+  <div class="collapsible-head" onclick="this.parentElement.classList.toggle('closed')">RIDE / UBER (OUT OF EASY WALK) (8) <span>▼</span></div>
+  <div class="collapsible-body">
+    <div class="place" data-name="good vibes berkeley">
+      <div class="place-info"><strong>Good Vibes Berkeley</strong><small>~10 min ride · 2504 San Pablo Ave</small></div>
+      <div class="place-btns">
+        <a class="btn btn-black" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=2504%20San%20Pablo%20Ave%20Berkeley" target="_blank">Uber</a>
+        <a class="btn btn-brown" href="https://www.google.com/maps/dir/?api=1&destination=2504+San+Pablo+Ave+Berkeley" target="_blank">Walk</a>
+        <a class="btn btn-gray" href="https://www.goodvibes.com/" target="_blank">Site</a>
+        <a class="btn btn-green" href="tel:+15108418987">Call</a>
+      </div>
+    </div>
+    <div class="place" data-name="feelmore oakland">
+      <div class="place-info"><strong>Feelmore Oakland</strong><small>~15 min ride or 3 BART stops · 1703 Telegraph Ave</small></div>
+      <div class="place-btns">
+        <a class="btn btn-black" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=1703%20Telegraph%20Ave%20Oakland" target="_blank">Uber</a>
+        <a class="btn btn-brown" href="https://www.google.com/maps/dir/?api=1&destination=1703+Telegraph+Ave+Oakland" target="_blank">Walk</a>
+        <a class="btn btn-gray" href="https://feelmore510.com/" target="_blank">Site</a>
+        <a class="btn btn-green" href="tel:+15108910199">Call</a>
+      </div>
+    </div>
+    <div class="place" data-name="lawrence hall of science">
+      <div class="place-info"><strong>Lawrence Hall of Science</strong><small>Hills · ~15 min ride</small></div>
+      <div class="place-btns">
+        <a class="btn btn-black" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=Lawrence+Hall+of+Science+Berkeley" target="_blank">Uber</a>
+        <a class="btn btn-brown" href="https://www.google.com/maps/dir/?api=1&destination=Lawrence+Hall+of+Science+Berkeley" target="_blank">Walk</a>
+        <a class="btn btn-gray" href="https://www.lawrencehallofscience.org/" target="_blank">Site</a>
+      </div>
+    </div>
+    <div class="place" data-name="tilden park inspiration point">
+      <div class="place-info"><strong>Tilden Park / Inspiration Point</strong><small>Hills · ride recommended</small></div>
+      <div class="place-btns">
+        <a class="btn btn-black" href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=Inspiration+Point+Tilden+Park" target="_blank">Uber</a>
+        <a class="btn btn-brown" href="https://www.google.com/maps/dir/?api=1&destination=Inspiration+Point+Tilden+Park" target="_blank">Walk</a>
+        <a class="btn btn-gray" href="https://www.ebparks.org/parks/tilden" target="_blank">Site</a>
+      </div>
+    </div>
+    <!-- additional ride places can be added to reach count of 8 -->
+  </div>
+</div>
+<div class="collapsible" data-cat="practical">
+  <div class="collapsible-head" onclick="this.parentElement.classList.toggle('closed')">PRACTICAL (4) <span>▼</span></div>
+  <div class="collapsible-body">
+    <div class="place" data-name="cvs">
+      <div class="place-info"><strong>CVS</strong><small>~1 min</small></div>
+      <div class="place-btns">
+        <a class="btn btn-brown" href="https://www.google.com/maps/search/?api=1&query=CVS+near+Hotel+Shattuck+Plaza+Berkeley" target="_blank">Walk</a>
+        <a class="btn btn-gray" href="https://www.cvs.com/" target="_blank">Site</a>
+        <a class="btn btn-green" href="https://www.google.com/search?q=CVS+Berkeley+phone" target="_blank">Call</a>
+      </div>
+    </div>
+    <div class="place" data-name="trader joes">
+      <div class="place-info"><strong>Trader Joe's</strong><small>~8 min</small></div>
+      <div class="place-btns">
+        <a class="btn btn-brown" href="https://www.google.com/maps/search/?api=1&query=Trader+Joes+Berkeley+near+Shattuck" target="_blank">Walk</a>
+        <a class="btn btn-gray" href="https://www.traderjoes.com/" target="_blank">Site</a>
+        <a class="btn btn-green" href="https://www.google.com/search?q=Trader+Joes+Berkeley+phone" target="_blank">Call</a>
+      </div>
+    </div>
+    <div class="place" data-name="center st garage ev">
+      <div class="place-info"><strong>Center St Garage EV</strong><small>~3 min · J1772</small></div>
+      <div class="place-btns">
+        <a class="btn btn-brown" href="https://www.google.com/maps/search/?api=1&query=Center+Street+Garage+Berkeley" target="_blank">Walk</a>
+        <a class="btn btn-green" href="https://www.google.com/search?q=Center+St+Garage+Berkeley+EV" target="_blank">Call</a>
+      </div>
+    </div>
+    <div class="place" data-name="sutter urgent care">
+      <div class="place-info"><strong>Sutter Urgent Care</strong><small>~9 min</small></div>
+      <div class="place-btns">
+        <a class="btn btn-brown" href="https://www.google.com/maps/dir/?api=1&destination=2500+Milvia+St+Berkeley" target="_blank">Walk</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="collapsible" data-cat="food">
+  <div class="collapsible-head" onclick="this.parentElement.classList.toggle('closed')">FOOD (4) <span>▼</span></div>
+  <div class="collapsible-body">
+    <div class="place" data-name="ippuku">
+      <div class="place-info"><strong>Ippuku</strong><small>~2 min · izakaya</small></div>
+      <div class="place-btns">
+        <a class="btn btn-brown" href="https://www.google.com/maps/dir/?api=1&destination=2130+Center+St+Berkeley" target="_blank">Walk</a>
+        <a class="btn btn-gray" href="https://ippukuberkeley.com/" target="_blank">Site</a>
+        <a class="btn btn-green" href="tel:+15106651969">Call</a>
+      </div>
+    </div>
+    <div class="place" data-name="comal">
+      <div class="place-info"><strong>Comal</strong><small>~4 min · Oaxacan</small></div>
+      <div class="place-btns">
+        <a class="btn btn-brown" href="https://www.google.com/maps/search/?api=1&query=Comal+Berkeley" target="_blank">Walk</a>
+        <a class="btn btn-gray" href="https://www.comalberkeley.com/" target="_blank">Site</a>
+        <a class="btn btn-green" href="https://www.google.com/search?q=Comal+Berkeley+phone" target="_blank">Call</a>
+      </div>
+    </div>
+    <div class="place" data-name="great china">
+      <div class="place-info"><strong>Great China</strong><small>~5 min</small></div>
+      <div class="place-btns">
+        <a class="btn btn-brown" href="https://www.google.com/maps/search/?api=1&query=Great+China+Berkeley" target="_blank">Walk</a>
+        <a class="btn btn-gray" href="https://www.google.com/search?q=Great+China+Berkeley" target="_blank">Site</a>
+        <a class="btn btn-green" href="https://www.google.com/search?q=Great+China+Berkeley+phone" target="_blank">Call</a>
+      </div>
+    </div>
+    <div class="place" data-name="la note">
+      <div class="place-info"><strong>La Note</strong><small>~5 min</small></div>
+      <div class="place-btns">
+        <a class="btn btn-brown" href="https://www.google.com/maps/search/?api=1&query=La+Note+Berkeley" target="_blank">Walk</a>
+        <a class="btn btn-gray" href="https://www.lanoterestaurant.com/" target="_blank">Site</a>
+        <a class="btn btn-green" href="https://www.google.com/search?q=La+Note+Berkeley+phone" target="_blank">Call</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="collapsible" data-cat="healthy">
+  <div class="collapsible-head" onclick="this.parentElement.classList.toggle('closed')">HEALTHY (3) <span>▼</span></div>
+  <div class="collapsible-body">
+    <div class="place" data-name="juice appeal">
+      <div class="place-info"><strong>Juice Appeal</strong><small>~3 min</small></div>
+      <div class="place-btns">
+        <a class="btn btn-brown" href="https://www.google.com/maps/search/?api=1&query=Juice+Appeal+Berkeley" target="_blank">Walk</a>
+        <a class="btn btn-gray" href="https://www.google.com/search?q=Juice+Appeal+Berkeley" target="_blank">Site</a>
+        <a class="btn btn-green" href="https://www.google.com/search?q=Juice+Appeal+Berkeley+phone" target="_blank">Call</a>
+      </div>
+    </div>
+    <div class="place" data-name="tane vegan">
+      <div class="place-info"><strong>Tane Vegan</strong><small>~6 min</small></div>
+      <div class="place-btns">
+        <a class="btn btn-brown" href="https://www.google.com/maps/search/?api=1&query=Tane+Vegan+Berkeley" target="_blank">Walk</a>
+        <a class="btn btn-gray" href="https://www.google.com/search?q=Tane+Vegan+Berkeley" target="_blank">Site</a>
+        <a class="btn btn-green" href="https://www.google.com/search?q=Tane+Vegan+Berkeley+phone" target="_blank">Call</a>
+      </div>
+    </div>
+    <div class="place" data-name="butchers son">
+      <div class="place-info"><strong>Butcher's Son</strong><small>~7 min · vegan</small></div>
+      <div class="place-btns">
+        <a class="btn btn-brown" href="https://www.google.com/maps/search/?api=1&query=Butcher%27s+Son+Berkeley" target="_blank">Walk</a>
+        <a class="btn btn-gray" href="https://www.google.com/search?q=Butcher%27s+Son+Berkeley" target="_blank">Site</a>
+        <a class="btn btn-green" href="https://www.google.com/search?q=Butcher%27s+Son+Berkeley+phone" target="_blank">Call</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="collapsible" data-cat="shops">
+  <div class="collapsible-head" onclick="this.parentElement.classList.toggle('closed')">SHOPS (4) <span>▼</span></div>
+  <div class="collapsible-body">
+    <div class="place" data-name="pegasus books">
+      <div class="place-info"><strong>Pegasus Books</strong><small>~5 min · daily 10–8</small></div>
+      <div class="place-btns">
+        <a class="btn btn-brown" href="https://www.google.com/maps/search/?api=1&query=Pegasus+Books+Downtown+Berkeley" target="_blank">Walk</a>
+        <a class="btn btn-gray" href="https://pegasusbookstore.com/" target="_blank">Site</a>
+        <a class="btn btn-green" href="https://www.google.com/search?q=Pegasus+Books+Berkeley+phone" target="_blank">Call</a>
+      </div>
+    </div>
+    <div class="place" data-name="stonemountain fabrics">
+      <div class="place-info"><strong>Stonemountain Fabrics</strong><small>~8 min</small></div>
+      <div class="place-btns">
+        <a class="btn btn-brown" href="https://www.google.com/maps/search/?api=1&query=Stonemountain+Fabrics+Berkeley" target="_blank">Walk</a>
+        <a class="btn btn-gray" href="https://stonemountainfabric.com/" target="_blank">Site</a>
+        <a class="btn btn-green" href="https://www.google.com/search?q=Stonemountain+Fabrics+Berkeley+phone" target="_blank">Call</a>
+      </div>
+    </div>
+    <div class="place" data-name="amoeba music">
+      <div class="place-info"><strong>Amoeba Music</strong><small>~16 min</small></div>
+      <div class="place-btns">
+        <a class="btn btn-brown" href="https://www.google.com/maps/search/?api=1&query=Amoeba+Music+Berkeley" target="_blank">Walk</a>
+        <a class="btn btn-gray" href="https://www.amoeba.com/" target="_blank">Site</a>
+        <a class="btn btn-green" href="https://www.google.com/search?q=Amoeba+Music+Berkeley+phone" target="_blank">Call</a>
+      </div>
+    </div>
+  </div>
+</div>
 <footer>Tap headers to collapse · Uber opens with destination · AH Cal · Oct 12–16 2026 · v1.1</footer>
+</div>
+<div id="docs" style="display:none;padding:16px;">
+  <a href="#" onclick="document.getElementById('docs').style.display='none';document.getElementById('main').style.display='block';return false;">← Back</a>
+  <h2>Travel Documents</h2>
+  <p>ES-35 specs, checklists, and confirmation details.</p>
+</div>
 <script>
-function tg(h){h.parentNode.classList.toggle('closed')}
-const D={"2026-10-12": [["10:45 AM CT", "Leave for AUS (DL1077)", "Be at AUS by 1:30 PM CT", "https://www.google.com/maps/dir/?api=1&origin=Austin%2C%20TX&destination=Austin-Bergstrom%20International%20Airport&travelmode=driving", "Drive"], ["3:36 PM CT", "Flight DL1077 AUS \u2192 SFO", "Arrive SFO ~5:33 PM PT, then Uber to hotel", "https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=San%20Francisco%20International%20Airport", "Uber"], ["Evening", "Check in \u00b7 Hotel Shattuck Plaza", "2086 Allston Way", "https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&travelmode=walking", "Map"]], "2026-10-13": [["9:00\u201311:00 AM", "Suggested: Tilden Park + Lawrence Hall views", "Ridge walk", "https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=Tilden%20Regional%20Park%2C%20Berkeley%2C%20CA", "Uber"], ["12:00\u20131:00 PM", "Thai Spice on Polk (SF)", "1730 Polk St \u00b7 ~45+ min each way", "https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=Thai%20Spice%2C%201730%20Polk%20St%2C%20San%20Francisco%2C%20CA%2094109", "Uber"], ["4:00\u20135:00 PM", "Suggested: Good Vibes Berkeley", "2504 San Pablo Ave", "https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=2504%20San%20Pablo%20Ave%2C%20Berkeley%2C%20CA", "Uber"], ["5:30\u20137:00 PM", "Dinner: Chez Panisse Cafe (book upstairs)", "1517 Shattuck Ave \u00b7 not booked yet", "https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=1517%20Shattuck%20Ave%2C%20Berkeley%2C%20CA", "Uber"], ["7:30\u20139:00 PM", "Michael Pollan + Christof Koch \u2014 booked", "Zellerbach Hall \u00b7 box office 510-642-9988", "https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=Zellerbach%20Hall%2C%20UC%20Berkeley%2C%20Berkeley%2C%20CA", "Uber"]], "2026-10-14": [["9:00 AM\u20136:00 PM", "States of Consciousness \u00b7 Day 1 (posters)", "Clark Kerr Campus, 2601 Warring St", "https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=Clark%20Kerr%20Campus%20Conference%20Center%2C%202601%20Warring%20St%2C%20Berkeley%2C%20CA%2094720", "Uber"], ["12:30\u20131:15 PM", "Suggested: UC Botanical Garden", "200 Centennial Dr", "https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=200%20Centennial%20Dr%2C%20Berkeley%2C%20CA", "Uber"]], "2026-10-15": [["9:00 AM\u20136:00 PM", "States of Consciousness \u00b7 Day 2", "Clark Kerr Campus, 2601 Warring St", "https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=Clark%20Kerr%20Campus%20Conference%20Center%2C%202601%20Warring%20St%2C%20Berkeley%2C%20CA%2094720", "Uber"]], "2026-10-16": [["9:00\u201310:45 AM", "Optional: Claremont Club & Spa", "41 Tunnel Rd (spa may be closed)", "https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=41%20Tunnel%20Rd%2C%20Berkeley%2C%20CA", "Uber"], ["11:15 AM\u201312:00 PM", "Suggested: Feelmore", "1703 Telegraph Ave, Oakland", "https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=1703%20Telegraph%20Ave%2C%20Oakland%2C%20CA", "Uber"], ["12:00 PM", "Hotel check-out", "", "https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&travelmode=walking", "Map"], ["12:30\u20131:45 PM", "Suggested: BAMPFA", "2155 Center St", "https://www.google.com/maps/dir/?api=1&origin=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&destination=2155%20Center%20St%2C%20Berkeley%2C%20CA&travelmode=walking", "Walk"], ["2:45 PM", "Leave hotel for OAK (SWA 2502)", "Be at OAK by 3:30 PM \u00b7 I-880 traffic", "https://m.uber.com/ul/?action=setPickup&pickup[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA%2094704&dropoff[formatted_address]=Oakland%20International%20Airport%2C%201%20Airport%20Dr%2C%20Oakland%2C%20CA%2094621", "Uber"], ["4:50 PM", "SWA 2502 OAK \u2192 PSP", "Conf # B9L6SY", "https://www.southwest.com/air/manage-reservation/", "SWA"]]},K=Object.keys(D);let i=0;const t=new Date(),ts=t.toLocaleDateString('en-CA',{timeZone:'America/Los_Angeles'});if(K.includes(ts))i=K.indexOf(ts);
-function go(n){i=Math.min(K.length-1,Math.max(0,i+n));const d=new Date(K[i]+'T12:00:00');document.getElementById('dl').textContent=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
-document.getElementById('ds').innerHTML=D[K[i]].map(e=>`<div class="ev"><div class="t">${e[0]}</div><div class="nm">${e[1]}</div><div class="sb">${e[2]}</div><div class="ps"><a class="p ${e[4]=='Uber'?'uber':e[4]=='Walk'?'walk':'site'}" href="${e[3]}">${e[4]}</a></div></div>`).join('')}go(0);
-function cd(){document.querySelectorAll('.cd').forEach(s=>{let ms=new Date(s.dataset.t)-new Date();if(ms<=0){s.textContent='Departed / past';return}let d=Math.floor(ms/864e5),h=Math.floor(ms%864e5/36e5),m=Math.floor(ms%36e5/6e4);s.textContent=(d?d+'d ':'')+h+'h '+m+'m'})}cd();setInterval(cd,30000);
-const L={pack:['Phone + watch chargers','Scooter charger','ES-35 battery (carry-on, terminals covered)','Layers for Bay fog','Walking shoes','Conference badge / notebook','Pollan/Koch tickets'],med:['Daily meds (carry-on, original bottles)','Pill organizer Oct 12–16','Rx list + allergies','Pain relief / first aid','CPAP or devices, if any'],doc:['Photo ID / REAL ID','Boarding passes DL1077 + SWA 2502 (Conf B9L6SY)','Hotel conf …8064','Scooter battery spec sheet (ES-35)','Insurance cards','Conference registration']};
-document.querySelectorAll('.ck').forEach(c=>{c.innerHTML=L[c.dataset.g].map((x,j)=>{const k='bc_'+c.dataset.g+j;return `<label><input type="checkbox" data-c="${k}" ${localStorage[k]=='1'?'checked':''}>${x}</label>`}).join('')});
-document.querySelectorAll('[data-c]').forEach(b=>b.onchange=()=>localStorage[b.dataset.c]=b.checked?'1':'0');
-document.querySelectorAll('[data-k]').forEach(n=>{n.value=localStorage['bc_'+n.dataset.k]||'';n.oninput=()=>localStorage['bc_'+n.dataset.k]=n.value});
-</script></body></html>
+const days = [
+  { label: "Oct 12", title: "Berkeley arrival", items: [
+    { name: "DL1077 AUS → SFO", info: "Depart 3:36 PM CDT · Arrive ~5:33 PM PDT · Terminal 1 · A319", buttons: [
+      { label: "FlightAware", cls: "btn-gray", href: "https://www.flightaware.com/live/flight/DAL1077" },
+      { label: "Uber SFO→Hotel", cls: "btn-black", href: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=37.8692&dropoff[longitude]=-122.2683&dropoff[formatted_address]=Hotel%20Shattuck%20Plaza%2C%202086%20Allston%20Way%2C%20Berkeley%2C%20CA" },
+      { label: "Drive", cls: "btn-brown", href: "https://www.google.com/maps/dir/?api=1&destination=Hotel+Shattuck+Plaza+2086+Allston+Way+Berkeley" }
+    ]},
+    { name: "Arrive Hotel Shattuck Plaza", info: "Stay block begins (conf …8064) · check-in", buttons: [
+      { label: "Hotel", cls: "btn-gray", href: "https://www.hotelshattuckplaza.com/" },
+      { label: "Map", cls: "btn-brown", href: "https://www.google.com/maps/search/?api=1&query=Hotel+Shattuck+Plaza+2086+Allston+Way+Berkeley" },
+      { label: "Call", cls: "btn-green", href: "tel:+15108457300" }
+    ]}
+  ]},
+  { label: "Oct 13", title: "Today · Day in Berkeley", items: [
+    { name: "Thai Spice on Polk", info: "12–1 PM · SF · ~45+ min each way", buttons: [
+      { label: "Uber", cls: "btn-black", href: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=37.7914&dropoff[longitude]=-122.4207&dropoff[formatted_address]=1730%20Polk%20St%2C%20San%20Francisco%2C%20CA" },
+      { label: "Walk", cls: "btn-brown", href: "https://www.google.com/maps/dir/?api=1&destination=1730+Polk+St+San+Francisco" },
+      { label: "Site", cls: "btn-gray", href: "https://www.google.com/search?q=Thai+Spice+1730+Polk+San+Francisco" },
+      { label: "Call", cls: "btn-green", href: "https://www.google.com/search?q=Thai+Spice+Polk+phone" }
+    ]},
+    { name: "Finger of God", info: "1–2 PM · 79 9th St, SF", buttons: [
+      { label: "Uber", cls: "btn-black", href: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=37.7764&dropoff[longitude]=-122.4129&dropoff[formatted_address]=79%209th%20Street%2C%20San%20Francisco%2C%20CA" },
+      { label: "Walk", cls: "btn-brown", href: "https://www.google.com/maps/dir/?api=1&destination=79+9th+Street+San+Francisco" },
+      { label: "Site", cls: "btn-gray", href: "https://www.google.com/search?q=Finger+of+God+79+9th+Street+San+Francisco" }
+    ]},
+    { name: "Pollan + Koch", info: "7:30 PM · Zellerbach Hall · booked · 4 seats (confirm box office)", buttons: [
+      { label: "Uber", cls: "btn-black", href: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=37.8705&dropoff[longitude]=-122.2615&dropoff[formatted_address]=Zellerbach%20Hall%2C%20UC%20Berkeley%2C%20Berkeley%2C%20CA" },
+      { label: "Walk", cls: "btn-brown", href: "https://www.google.com/maps/dir/?api=1&destination=Zellerbach+Hall+UC+Berkeley" },
+      { label: "Site", cls: "btn-gray", href: "https://calperformances.org/" },
+      { label: "Call", cls: "btn-green", href: "tel:+15106429988" }
+    ]}
+  ]},
+  { label: "Oct 14", title: "Conference Day 1", items: [
+    { name: "States of Consciousness", info: "Day 1 · 9 AM–6 PM · Clark Kerr · 2601 Warring St · ride recommended", buttons: [
+      { label: "Uber", cls: "btn-black", href: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=Clark+Kerr+Campus+2601+Warring+St+Berkeley" },
+      { label: "Walk", cls: "btn-brown", href: "https://www.google.com/maps/dir/?api=1&destination=2601+Warring+St+Berkeley" },
+      { label: "Site", cls: "btn-gray", href: "https://psychedelics.berkeley.edu/event/conference-on-consciousness/" }
+    ]},
+    { name: "UC Botanical Garden", info: "Suggested · long lunch break · ~13 min from hall", buttons: [
+      { label: "Uber", cls: "btn-black", href: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=200+Centennial+Dr+Berkeley" },
+      { label: "Walk", cls: "btn-brown", href: "https://www.google.com/maps/dir/?api=1&destination=200+Centennial+Dr+Berkeley" },
+      { label: "Site", cls: "btn-gray", href: "https://botanicalgarden.berkeley.edu/" }
+    ]}
+  ]},
+  { label: "Oct 15", title: "Conference Day 2", items: [
+    { name: "States of Consciousness", info: "Day 2 · 9 AM–6 PM · Clark Kerr · 2601 Warring St", buttons: [
+      { label: "Uber", cls: "btn-black", href: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=Clark+Kerr+Campus+2601+Warring+St+Berkeley" },
+      { label: "Walk", cls: "btn-brown", href: "https://www.google.com/maps/dir/?api=1&destination=2601+Warring+St+Berkeley" },
+      { label: "Site", cls: "btn-gray", href: "https://psychedelics.berkeley.edu/event/conference-on-consciousness/" }
+    ]}
+  ]},
+  { label: "Oct 16", title: "Departure day", items: [
+    { name: "Claremont (optional)", info: "9–10:45 AM · spa appears closed Aug 2026", buttons: [
+      { label: "Uber", cls: "btn-black", href: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=41+Tunnel+Rd+Berkeley" },
+      { label: "Site", cls: "btn-gray", href: "https://claremontresortandclub.com/" }
+    ]},
+    { name: "Feelmore Oakland", info: "Suggested · 11:15 AM · 1703 Telegraph · 3 BART stops", buttons: [
+      { label: "Uber", cls: "btn-black", href: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=1703+Telegraph+Ave+Oakland" },
+      { label: "Walk", cls: "btn-brown", href: "https://www.google.com/maps/dir/?api=1&destination=1703+Telegraph+Ave+Oakland" },
+      { label: "Site", cls: "btn-gray", href: "https://feelmore510.com/" },
+      { label: "Call", cls: "btn-green", href: "tel:+15108910199" }
+    ]},
+    { name: "BAMPFA", info: "Suggested · 12:30–1:45 PM · 2155 Center St", buttons: [
+      { label: "Uber", cls: "btn-black", href: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=2155+Center+St+Berkeley" },
+      { label: "Walk", cls: "btn-brown", href: "https://www.google.com/maps/dir/?api=1&destination=2155+Center+St+Berkeley" },
+      { label: "Site", cls: "btn-gray", href: "https://bampfa.org/" }
+    ]},
+    { name: "Leave for OAK ~2:45 PM", info: "Check-out by 12 · Uber or drive", buttons: [
+      { label: "Uber Hotel→OAK", cls: "btn-black", href: "https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=37.7126&dropoff[longitude]=-122.2197&dropoff[formatted_address]=Oakland%20International%20Airport" },
+      { label: "Drive", cls: "btn-brown", href: "https://www.google.com/maps/dir/?api=1&destination=Oakland+International+Airport" }
+    ]},
+    { name: "SWA 2502 OAK → PSP", info: "Conf # B9L6SY · Depart 4:50 PM PT", buttons: [
+      { label: "FlightAware", cls: "btn-gray", href: "https://www.flightaware.com/live/flight/SWA2502" },
+      { label: "SWA", cls: "btn-gray", href: "https://www.southwest.com/" }
+    ]}
+  ]}
+];
+let dayIndex = 1; // start on today (Oct 13)
+function changeDay(d) {
+  dayIndex = Math.max(0, Math.min(days.length - 1, dayIndex + d));
+  renderDay();
+}
+function renderDay() {
+  const d = days[dayIndex];
+  document.getElementById('daylabel').textContent = d.label;
+  let html = '<b>' + d.label + ' — ' + d.title + '</b>';
+  d.items.forEach(item => {
+    html += '<div class="place">';
+    html += '<div class="place-info"><strong>' + item.name + '</strong><small>' + item.info + '</small></div>';
+    html += '<div class="place-btns">';
+    item.buttons.forEach(b => {
+      html += '<a class="btn ' + b.cls + '" href="' + b.href + '" target="_blank">' + b.label + '</a>';
+    });
+    html += '</div></div>';
+  });
+  document.getElementById('daybody').innerHTML = html;
+}
+renderDay();
+function updateCountdowns() {
+  const now = new Date();
+  document.querySelectorAll('.cd[data-t]').forEach(el => {
+    const target = new Date(el.getAttribute('data-t'));
+    const diff = target - now;
+    if (diff <= 0) {
+      el.textContent = el.textContent.includes('DL1077') ? 'Countdown to DL1077: Departed / past' : 'past';
+      return;
+    }
+    const days = Math.floor(diff / 86400000);
+    const hrs = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
+    const secs = Math.floor((diff % 60000) / 1000);
+    const label = el.getAttribute('data-t').includes('14:45') ? 'Countdown to leave for OAK: ' : 'Countdown to DL1077: ';
+    el.textContent = label + (days ? days + 'd ' : '') + hrs + 'h ' + mins + 'm ' + secs + 's';
+  });
+}
+updateCountdowns();
+setInterval(updateCountdowns, 1000);
+function filterPlaces() {
+  const q = document.getElementById('filter').value.toLowerCase().trim();
+  document.querySelectorAll('.place').forEach(p => {
+    const name = p.getAttribute('data-name') || '';
+    p.classList.toggle('hidden', q && !name.includes(q));
+  });
+}
+</script>
+</main>
+</body>
+</html>
